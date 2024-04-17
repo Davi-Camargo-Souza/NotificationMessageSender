@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MessageSender.Core\MessageSender.Core.csproj" />
+    <ProjectReference Include="..\MessageSender.Core\NotificationMessageSender.Core.csproj" />
   </ItemGroup>
 
 </Project>

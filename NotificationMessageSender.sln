@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageSender.API", "MessageSenderAPI\MessageSender.API.csproj", "{772FF60C-EEFE-4C29-A520-5C4935457C0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationMessageSender.API", "MessageSenderAPI\NotificationMessageSender.API.csproj", "{772FF60C-EEFE-4C29-A520-5C4935457C0B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{44CB0F16-3A8A-4804-B41F-E8FBBD729523} = {44CB0F16-3A8A-4804-B41F-E8FBBD729523}
 		{FCAE8656-3E7C-4C02-BA91-8F23A1F62B32} = {FCAE8656-3E7C-4C02-BA91-8F23A1F62B32}
@@ -17,11 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{DECE36F7-03F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{42C1D269-D32B-4271-8C48-F80DD1E8FA2C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageSender.Core", "MessageSender.Core\MessageSender.Core.csproj", "{FCAE8656-3E7C-4C02-BA91-8F23A1F62B32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationMessageSender.Core", "MessageSender.Core\NotificationMessageSender.Core.csproj", "{FCAE8656-3E7C-4C02-BA91-8F23A1F62B32}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infraestructure", "infraestructure", "{E89A5C35-AD43-4DDE-8CF6-9E38856D7E1D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageSender.Infraestructure", "MessageSender.Infraestructure\MessageSender.Infraestructure.csproj", "{44CB0F16-3A8A-4804-B41F-E8FBBD729523}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationMessageSender.Infraestructure", "MessageSender.Infraestructure\NotificationMessageSender.Infraestructure.csproj", "{44CB0F16-3A8A-4804-B41F-E8FBBD729523}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
