@@ -63,7 +63,6 @@ namespace MessageSender.Infraestructure.Repositories
                              $"WHERE \"Id\" = '{id}'";
                 var queryResult = await connection.QueryFirstOrDefaultAsync<T>(sql, cancellationToken);
                 connection.Close();
-                if (queryResult == null) throw new Exception("Registro não encontrado");
                 return queryResult;
             }
         }
@@ -114,6 +113,7 @@ namespace MessageSender.Infraestructure.Repositories
 
         public void Update(T entity)
         {
+            entity.UpdatedAt = DateTime.Now.ToUniversalTime();
             _context.Update(entity);
         }
 

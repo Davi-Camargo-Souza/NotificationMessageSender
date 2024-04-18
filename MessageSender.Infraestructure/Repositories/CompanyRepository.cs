@@ -39,9 +39,8 @@ namespace MessageSender.Infraestructure.Repositories
                 var sql = $"SELECT *" +
                           $"FROM \"Companies\"" +
                           $"WHERE \"Cnpj\" = '{cnpj}'";
-                var queryResult = await connection.QueryFirstAsync(sql, cancellationToken);
+                var queryResult = await connection.QueryFirstOrDefaultAsync<CompanyEntity>(sql, cancellationToken);
                 connection.Close();
-                if (queryResult == null) throw new Exception("Registro não encontrado");
                 return queryResult;
             }
         }
@@ -54,9 +53,8 @@ namespace MessageSender.Infraestructure.Repositories
                 var sql = $"SELECT *" +
                           $"FROM \"Companies\"" +
                           $"WHERE \"Email\" = '{email}'";
-                var queryResult = await connection.QueryFirstAsync(sql, cancellationToken);
+                var queryResult = await connection.QueryFirstOrDefaultAsync<CompanyEntity>(sql, cancellationToken);
                 connection.Close();
-                if (queryResult == null) throw new Exception("Registro não encontrado");
                 return queryResult;
             }
         }

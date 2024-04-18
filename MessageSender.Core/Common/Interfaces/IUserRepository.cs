@@ -2,7 +2,7 @@
 
 namespace MessageSender.Core.Common.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<UserEntity>
     {
         Task<UserEntity> GetUserByCpf(string cpf, CancellationToken cancellationToken);
     }

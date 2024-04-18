@@ -24,11 +24,11 @@ namespace MessageSender.Infraestructure.Repositories
                 var sql = $"SELECT *" +
                           $"FROM \"Users\"" +
                           $"WHERE \"Cpf\" = '{cpf}'";
-                var queryResult = await connection.QueryFirstAsync(sql, cancellationToken);
-                if (queryResult == null) throw new Exception("Registro não encontrado");
+                var queryResult = await connection.QueryFirstOrDefaultAsync<UserEntity>(sql, cancellationToken);
                 connection.Close();
                 return queryResult;
             }
         }
+
     }
 }
