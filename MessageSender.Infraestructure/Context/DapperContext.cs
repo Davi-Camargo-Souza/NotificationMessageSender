@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MessageSender.Infraestructure.Context
+namespace NotificationMessageSender.Infraestructure.Context
 {
     public class DapperContext
     {

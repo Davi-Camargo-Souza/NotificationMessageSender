@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using NotificationMessageSender.API.Application.CQRS.Commands;
 using NotificationMessageSender.API.DTOs.Responses.User;
-using MessageSender.Core.Common.Interfaces;
+using NotificationMessageSender.Core.Common.Interfaces;
 using AutoMapper;
-using MessageSender.Core.Common.Uteis;
-using MessageSender.Core.Common.Domain.Entities;
+using NotificationMessageSender.Core.Common.Uteis;
+using NotificationMessageSender.Core.Common.Domain.Entities;
+using NotificationMessageSender.API.Application.CQRS.Commands.User;
 
 namespace NotificationMessageSender.API.Application.CQRS.Handlers.User
 {

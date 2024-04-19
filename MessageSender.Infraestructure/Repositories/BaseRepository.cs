@@ -1,9 +1,9 @@
 ﻿using Dapper;
-using MessageSender.Core.Common.Domain.Entities;
-using MessageSender.Infraestructure.Context;
-using MessageSender.Core.Common.Interfaces;
+using NotificationMessageSender.Core.Common.Domain.Entities;
+using NotificationMessageSender.Infraestructure.Context;
+using NotificationMessageSender.Core.Common.Interfaces;
 
-namespace MessageSender.Infraestructure.Repositories
+namespace NotificationMessageSender.Infraestructure.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
@@ -21,37 +21,37 @@ namespace MessageSender.Infraestructure.Repositories
             await _context.AddAsync(entity, cancellationToken);
         }
 
-        public async void Inativar(Guid id, string tabela, CancellationToken cancellationToken)
-        {
-            using (var connection = _dapper.CreateConnection())
-            {
-                connection.Open();
-                string sql = $"SELECT * " +
-                             $"FROM \"{tabela}\" " +
-                             $"WHERE \"Id\" = '{id}'";
-                var queryResult = await connection.QueryFirstOrDefaultAsync<T>(sql, cancellationToken);
-                connection.Close();
-                if (queryResult == null) throw new Exception("Registro não encontrado");
-                queryResult.Ativo = false;
-                Update(queryResult);
-            }
-        }
+        //public async void Inativar(Guid id, string tabela, CancellationToken cancellationToken)
+        //{
+        //    using (var connection = _dapper.CreateConnection())
+        //    {
+        //        connection.Open();
+        //        string sql = $"SELECT * " +
+        //                     $"FROM \"{tabela}\" " +
+        //                     $"WHERE \"Id\" = '{id}'";
+        //        var queryResult = await connection.QueryFirstOrDefaultAsync<T>(sql, cancellationToken);
+        //        connection.Close();
+        //        if (queryResult == null) throw new Exception("Registro não encontrado");
+        //        queryResult.Ativo = false;
+        //        Update(queryResult);
+        //    }
+        //}
 
-        public async void Ativar(Guid id, string tabela, CancellationToken cancellationToken)
-        {
-            using (var connection = _dapper.CreateConnection())
-            {
-                connection.Open();
-                string sql = $"SELECT * " +
-                             $"FROM \"{tabela}\" " +
-                             $"WHERE \"Id\" = '{id}'";
-                var queryResult = await connection.QueryFirstOrDefaultAsync<T>(sql, cancellationToken);
-                connection.Close();
-                if (queryResult == null) throw new Exception("Registro não encontrado");
-                queryResult.Ativo = true;
-                Update(queryResult);
-            }
-        }
+        //public async void Ativar(Guid id, string tabela, CancellationToken cancellationToken)
+        //{
+        //    using (var connection = _dapper.CreateConnection())
+        //    {
+        //        connection.Open();
+        //        string sql = $"SELECT * " +
+        //                     $"FROM \"{tabela}\" " +
+        //                     $"WHERE \"Id\" = '{id}'";
+        //        var queryResult = await connection.QueryFirstOrDefaultAsync<T>(sql, cancellationToken);
+        //        connection.Close();
+        //        if (queryResult == null) throw new Exception("Registro não encontrado");
+        //        queryResult.Ativo = true;
+        //        Update(queryResult);
+        //    }
+        //}
 
         public async Task<T> Get(Guid id, string tabela, CancellationToken cancellationToken)
         {
@@ -111,11 +111,11 @@ namespace MessageSender.Infraestructure.Repositories
             }
         }
 
-        public void Update(T entity)
-        {
-            entity.UpdatedAt = DateTime.Now.ToUniversalTime();
-            _context.Update(entity);
-        }
+        //public void Update(T entity)
+        //{
+        //    entity.UpdatedAt = DateTime.Now.ToUniversalTime();
+        //    _context.Update(entity);
+        //}
 
         public void Delete(T entity)
         {

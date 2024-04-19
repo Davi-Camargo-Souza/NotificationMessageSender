@@ -1,11 +1,12 @@
 ﻿using FluentValidation;
+using NotificationMessageSender.API.Application.CQRS.Commands.User;
 using NotificationMessageSender.API.DTOs.Requests.User;
 
 namespace NotificationMessageSender.API.Application.Validations
 {
-    public class CreateUserRequestValidations : AbstractValidator<CreateUserRequest>
+    public class CreateUserCommandValidations : AbstractValidator<CreateUserCommand>
     {
-        public CreateUserRequestValidations()
+        public CreateUserCommandValidations()
         {
             RuleFor(u => u.Password)
                 .NotEmpty()
@@ -22,7 +23,9 @@ namespace NotificationMessageSender.API.Application.Validations
                 .WithMessage("A senha não pode conter espaços em branco.");
 
             RuleFor(c => c.Cpf).NotEmpty().Length(11).WithMessage("O cpf precisa conter 11 dígitos.");
+
             RuleFor(c => c.Name).NotEmpty().WithMessage("O nome não pode estar vazio.");
+
             RuleFor(c => c.CompanyId).NotEmpty().WithMessage("O usuário precisa estar vinculado a uma empresa.");
         }
     }

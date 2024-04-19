@@ -1,11 +1,12 @@
 ﻿using FluentValidation;
+using NotificationMessageSender.API.Application.CQRS.Commands.Company;
 using NotificationMessageSender.API.DTOs.Requests.Company;
 
 namespace NotificationMessageSender.API.Application.Validations
 {
-    public class CreateCompanyRequestValidation : AbstractValidator<CreateCompanyRequest>
+    public class CreateCompanyCommandValidation : AbstractValidator<CreateCompanyCommand>
     {
-        public CreateCompanyRequestValidation()
+        public CreateCompanyCommandValidation()
         {
             RuleFor(c => c.Email)
                 .NotEmpty().WithMessage("O email não pode estar vazio.")

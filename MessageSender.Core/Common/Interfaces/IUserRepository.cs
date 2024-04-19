@@ -1,9 +1,11 @@
-﻿using MessageSender.Core.Common.Domain.Entities;
+﻿using NotificationMessageSender.Core.Common.Domain.Entities;
 
-namespace MessageSender.Core.Common.Interfaces
+namespace NotificationMessageSender.Core.Common.Interfaces
 {
     public interface IUserRepository : IBaseRepository<UserEntity>
     {
         Task<UserEntity> GetUserByCpf(string cpf, CancellationToken cancellationToken);
+        public void Update(UserEntity entity);
+
     }
 }

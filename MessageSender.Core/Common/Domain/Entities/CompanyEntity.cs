@@ -1,7 +1,7 @@
-﻿using MessageSender.Core.Common.Enums;
+﻿using NotificationMessageSender.Core.Common.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MessageSender.Core.Common.Domain.Entities
+namespace NotificationMessageSender.Core.Common.Domain.Entities
 {
     public class CompanyEntity : BaseEntity
     {
@@ -9,6 +9,8 @@ namespace MessageSender.Core.Common.Domain.Entities
         public string Cnpj { get; set; }
         public string Email { get; set; }
         public ContractEnum Contract {  get; set; }
+        public DateTime UpdatedAt { get; set; } = DateTime.Now.ToUniversalTime();
+        //public bool Ativo { get; set; } = true;
 
     }
 }

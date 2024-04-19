@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace MessageSender.Core.Common.Uteis
+namespace NotificationMessageSender.Core.Common.Uteis
 {
     public static class PasswordUtil
     {

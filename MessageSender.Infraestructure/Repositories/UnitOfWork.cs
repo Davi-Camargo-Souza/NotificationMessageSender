@@ -1,7 +1,7 @@
-﻿using MessageSender.Core.Common.Interfaces;
-using MessageSender.Infraestructure.Context;
+﻿using NotificationMessageSender.Core.Common.Interfaces;
+using NotificationMessageSender.Infraestructure.Context;
 
-namespace MessageSender.Infraestructure.Repositories
+namespace NotificationMessageSender.Infraestructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

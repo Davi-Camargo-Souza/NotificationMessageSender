@@ -1,4 +1,4 @@
-﻿namespace MessageSender.Core.Common.Interfaces
+﻿namespace NotificationMessageSender.Core.Common.Interfaces
 {
     public interface IUnitOfWork
     {

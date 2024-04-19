@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "MessageSenderAPI": {
+    "NotificationMessageSenderAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

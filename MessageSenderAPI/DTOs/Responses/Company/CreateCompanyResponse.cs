@@ -1,4 +1,4 @@
-﻿using MessageSender.Core.Common.Enums;
+﻿using NotificationMessageSender.Core.Common.Enums;
 
 namespace NotificationMessageSender.API.DTOs.Responses.Company
 {

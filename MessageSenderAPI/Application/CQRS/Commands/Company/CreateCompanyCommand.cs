@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using MessageSender.Core.Common.Enums;
+using NotificationMessageSender.Core.Common.Enums;
 using NotificationMessageSender.API.DTOs.Requests.Company;
 using NotificationMessageSender.API.DTOs.Responses.Company;
 
-namespace NotificationMessageSender.API.Application.CQRS.Commands
+namespace NotificationMessageSender.API.Application.CQRS.Commands.Company
 {
     public class CreateCompanyCommand : IRequest<CreateCompanyResponse>
     {

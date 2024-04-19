@@ -1,18 +1,21 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NotificationMessageSender.API.Application.CQRS.Commands;
+using NotificationMessageSender.API.Application.CQRS.Commands.Company;
 using NotificationMessageSender.API.DTOs.Requests.Company;
 using NotificationMessageSender.API.DTOs.Responses.Company;
 using NotificationMessageSender.API.DTOs.Responses.User;
 using NotificationMessageSender.Core.Common;
+using NotificationMessageSender.Core.Common.Enums;
 using System.Reflection;
 
 namespace NotificationMessageSender.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class CompanyController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -32,12 +35,15 @@ namespace NotificationMessageSender.API.Controllers
             {
                 var command = _mapper.Map<CreateCompanyCommand>(request);
                 serviceResponse.Dados = await _mediator.Send(command);
-            } catch (Exception ex)
+
+                return Created($"api/Company/{serviceResponse.Dados.Id}", serviceResponse);
+            }
+            catch (Exception ex)
             {
                 serviceResponse.Mensagem = ex.Message;
                 serviceResponse.Sucesso = false;
             }
-            return serviceResponse;
+            return BadRequest(serviceResponse);
         }
 
 

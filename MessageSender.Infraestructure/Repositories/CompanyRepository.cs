@@ -1,10 +1,10 @@
 ﻿using Dapper;
-using MessageSender.Core.Common.Domain.Entities;
-using MessageSender.Core.Common.Enums;
-using MessageSender.Infraestructure.Context;
-using MessageSender.Core.Common.Interfaces;
+using NotificationMessageSender.Core.Common.Domain.Entities;
+using NotificationMessageSender.Core.Common.Enums;
+using NotificationMessageSender.Infraestructure.Context;
+using NotificationMessageSender.Core.Common.Interfaces;
 
-namespace MessageSender.Infraestructure.Repositories
+namespace NotificationMessageSender.Infraestructure.Repositories
 {
     public class CompanyRepository : BaseRepository<CompanyEntity>, ICompanyRepository
     {

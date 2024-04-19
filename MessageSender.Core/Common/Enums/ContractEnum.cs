@@ -1,4 +1,4 @@
-﻿namespace MessageSender.Core.Common.Enums
+﻿namespace NotificationMessageSender.Core.Common.Enums
 {
     public enum ContractEnum
     {

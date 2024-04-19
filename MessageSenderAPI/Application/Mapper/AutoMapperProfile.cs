@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
-using MessageSender.Core.Common.Domain.Entities;
-using NotificationMessageSender.API.Application.CQRS.Commands;
+using NotificationMessageSender.Core.Common.Domain.Entities;
 using NotificationMessageSender.API.DTOs.Requests.Company;
 using NotificationMessageSender.API.DTOs.Requests.User;
 using NotificationMessageSender.API.DTOs.Responses.Company;
 using NotificationMessageSender.API.DTOs.Responses.User;
+using NotificationMessageSender.API.Application.CQRS.Commands.User;
+using NotificationMessageSender.API.Application.CQRS.Commands.Company;
+using NotificationMessageSender.API.DTOs.Responses;
 
 namespace NotificationMessageSender.API.Application.Mapper
 {
@@ -18,6 +20,7 @@ namespace NotificationMessageSender.API.Application.Mapper
             CreateMap<CreateCompanyCommand, CompanyEntity>();
             CreateMap<CompanyEntity, CreateCompanyResponse>();
             CreateMap<UserEntity, GetUserResponse>();
+            CreateMap<UserEntity, LoginResponse>();
         }
     }
 }

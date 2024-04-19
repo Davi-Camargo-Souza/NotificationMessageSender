@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MessageSender.Core.Common.Domain.Entities
+namespace NotificationMessageSender.Core.Common.Domain.Entities
 {
     public class ContractEntity
     {

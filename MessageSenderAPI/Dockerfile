@@ -8,17 +8,17 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["MessageSenderAPI/MessageSenderAPI.csproj", "MessageSenderAPI/"]
-RUN dotnet restore "./MessageSenderAPI/MessageSenderAPI.csproj"
+COPY ["NotificationMessageSenderAPI/NotificationMessageSenderAPI.csproj", "NotificationMessageSenderAPI/"]
+RUN dotnet restore "./NotificationMessageSenderAPI/NotificationMessageSenderAPI.csproj"
 COPY . .
-WORKDIR "/src/MessageSenderAPI"
-RUN dotnet build "./MessageSenderAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/NotificationMessageSenderAPI"
+RUN dotnet build "./NotificationMessageSenderAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./MessageSenderAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./NotificationMessageSenderAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MessageSenderAPI.dll"]
+ENTRYPOINT ["dotnet", "NotificationMessageSenderAPI.dll"]

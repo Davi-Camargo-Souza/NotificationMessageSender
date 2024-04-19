@@ -1,9 +1,9 @@
 ﻿using Dapper;
-using MessageSender.Core.Common.Domain.Entities;
-using MessageSender.Infraestructure.Context;
-using MessageSender.Core.Common.Interfaces;
+using NotificationMessageSender.Core.Common.Domain.Entities;
+using NotificationMessageSender.Infraestructure.Context;
+using NotificationMessageSender.Core.Common.Interfaces;
 
-namespace MessageSender.Infraestructure.Repositories
+namespace NotificationMessageSender.Infraestructure.Repositories
 {
     public class UserRepository : BaseRepository<UserEntity>, IUserRepository
     {
@@ -29,6 +29,13 @@ namespace MessageSender.Infraestructure.Repositories
                 return queryResult;
             }
         }
+
+        public void Update(UserEntity entity)
+        {
+            entity.UpdatedAt = DateTime.Now.ToUniversalTime();
+            _context.Update(entity);
+        }
+
 
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MessageSender.API.Migrations
+namespace NotificationMessageSender.API.Migrations
 {
     /// <inheritdoc />
     public partial class inicial : Migration

@@ -2,7 +2,7 @@
 using NotificationMessageSender.API.DTOs.Requests.User;
 using NotificationMessageSender.API.DTOs.Responses.User;
 
-namespace NotificationMessageSender.API.Application.CQRS.Commands
+namespace NotificationMessageSender.API.Application.CQRS.Commands.User
 {
     public class UpdateUserCommand : IRequest<GetUserResponse>
     {

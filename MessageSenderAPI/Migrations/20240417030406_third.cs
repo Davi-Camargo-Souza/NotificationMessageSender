@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MessageSender.API.Migrations
+namespace NotificationMessageSender.API.Migrations
 {
     /// <inheritdoc />
     public partial class third : Migration
