@@ -6,6 +6,11 @@ using NotificationMessageSender.Core.Common.DTOs;
 using NotificationMessageSender.Core.Common.Enums;
 using NotificationMessageSender.Core.Common.Exceptions;
 using NotificationMessageSender.Core.Common.Interfaces;
+using System.Text.RegularExpressions;
+using Vonage;
+using Vonage.Messages.WhatsApp;
+using Vonage.Messaging;
+using Vonage.Request;
 
 namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
 {
@@ -34,15 +39,35 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
             var user = _userRepository.Get(command.UserSender, "Users", cancellationToken).Result;
             var company = _companyRepository.Get(user.CompanyId, "Companies", cancellationToken).Result;
 
-            if (!NaoChegouNoLimiteDoContrato(company, cancellationToken)) 
+            if (!NaoChegouNoLimiteDoContrato(company, cancellationToken))
                 throw new LimiteDeNotificacoesAtingidaException();
-           
-            await _emailSender.SendEmailAsync(new EmailRequest(
+
+            if (command.Type == NotificationTypeEnum.Email)
+            {
+                if (!IsValidEmail(command.Receiver)) throw new Exception("Email de destino inválido.");
+
+                await _emailSender.SendEmailAsync(new EmailRequest(
                     company.Email,
                         command.Receiver,
                         command.Subject,
                         command.Message,
                         "t#st3S3nFF"));
+            }
+
+            if(command.Type == NotificationTypeEnum.SMS)
+            {
+                if (!IsPhoneNumberValid(command.Receiver)) throw new Exception("Telefone de destino inválido.");
+
+                command.Message = command.Subject + "\r\n" + command.Message;
+
+                var telephone = LimparFormatacaoTelefone(command.Receiver);
+
+                if (!telephone.StartsWith("55")) telephone = "55" + telephone;
+
+                command.Receiver = telephone;
+
+                await SendSMS(command);
+            }
 
             var notification = new NotificationsRequestEntity()
             {
@@ -83,6 +108,47 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
                 }
             }
             return false;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            string pattern = @"^[\w-]+(\.[\w-]+)*@([a-z\d]+(-[a-z\d]+)*\.)+[a-z]{2,}$";
+
+            return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
+        }
+
+        private async Task<Vonage.Messaging.SendSmsResponse> SendSMS(NotificationCommand command)
+        {
+            var credentials = Credentials.FromApiKeyAndSecret(
+                "e83c42fa",
+                "014XT3EN7XzDC3Iq"
+                );
+
+            var vonageClient = new VonageClient(credentials);
+
+            var response = await vonageClient.SmsClient.SendAnSmsAsync(new SendSmsRequest()
+            {
+                To = command.Receiver,
+                From = "Vonage APIs",
+                Text = command.Message
+            });
+
+            return response;
+        }
+
+        public static bool IsPhoneNumberValid(string phoneNumber)
+        {
+            phoneNumber = phoneNumber.Replace(" ", "");
+            string pattern = @"^\+?\d{0,2}\s?\(?\d{2,}\)?[-\s]?\d{5,}[-\s]?\d{4}$";
+
+            return Regex.IsMatch(phoneNumber, pattern);
+        }
+
+        public static string LimparFormatacaoTelefone(string numeroTelefone)
+        {
+            string numeroLimpo = Regex.Replace(numeroTelefone, @"[^\d]", "");
+
+            return numeroLimpo;
         }
     }
 }

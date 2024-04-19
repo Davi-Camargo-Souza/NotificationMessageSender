@@ -5,6 +5,7 @@ using NotificationMessageSender.API.DTOs.Responses;
 using NotificationMessageSender.API.Services;
 using NotificationMessageSender.Core.Common.Interfaces;
 using NotificationMessageSender.Core.Common.Uteis;
+using System.Security.Authentication;
 
 namespace NotificationMessageSender.API.Application.CQRS.Handlers
 {
@@ -25,12 +26,11 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers
         {
             var entity = _userRepository.GetUserByCpf(command.Cpf, cancellationToken).Result;
             if (entity == null) throw new Exception("Usuário não encontrado.");
-            //if (entity == null || entity.Ativo == false) throw new Exception("Usuário não encontrado.");
 
             var hashedCommandPassword = PasswordUtil.HashPassword(command.Password);
 
             if (PasswordUtil.HashPassword(hashedCommandPassword + entity.CreatedAt) !=
-                PasswordUtil.HashPassword(entity.Password + entity.CreatedAt)) throw new Exception("Senha incorreta.");
+                PasswordUtil.HashPassword(entity.Password + entity.CreatedAt)) throw new InvalidCredentialException("Senha incorreta.");
 
             var response = _mapper.Map<LoginResponse>(entity);
             response.BearerToken = _tokenService.Generate(entity);
