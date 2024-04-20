@@ -6,6 +6,8 @@ namespace NotificationMessageSender.Core.Common.Interfaces.Repositories
     {
         Task<UserEntity> GetUserByCpf(string cpf, CancellationToken cancellationToken);
         public void Update(UserEntity entity);
+        public Task<List<UserEntity>> GetAllUsersByCompany(Guid companyId, CancellationToken cancellationToken);
+
 
     }
 }

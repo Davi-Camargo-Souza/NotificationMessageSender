@@ -30,8 +30,4 @@
     <ProjectReference Include="..\NotificationMessageSender.Core.MessageBus\NotificationMessageSender.Core.MessageBus.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Application\CQRS\Queries\Company\" />
-  </ItemGroup>
-
 </Project>

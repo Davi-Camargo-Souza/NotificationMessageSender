@@ -117,7 +117,7 @@ namespace NotificationMessageSender.Infraestructure.Repositories
         //    _context.Update(entity);
         //}
 
-        public void Delete(T entity)
+        public async Task Delete(T entity)
         {
             _context.Remove(entity);
         }

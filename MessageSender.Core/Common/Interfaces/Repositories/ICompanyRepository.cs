@@ -8,5 +8,6 @@ namespace NotificationMessageSender.Core.Common.Interfaces.Repositories
         Task<List<CompanyEntity>> GetAllCompanyByContract(ContractEnum contract, CancellationToken cancellationToken);
         Task<CompanyEntity> GetCompanyByEmail(string email, CancellationToken cancellationToken);
         Task<CompanyEntity> GetCompanyByCnpj(string cnpj, CancellationToken cancellationToken);
+        public void Update(CompanyEntity entity);
     }
 }

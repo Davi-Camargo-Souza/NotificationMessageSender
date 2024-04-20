@@ -26,6 +26,20 @@ namespace NotificationMessageSender.Infraestructure.Repositories
             }
         }
 
+        public async Task<List<UserEntity>> GetAllUsersByCompany (Guid companyId, CancellationToken cancellationToken)
+        {
+            using (var connection = _dapper.CreateConnection())
+            {
+                connection.Open();
+                var sql = $"SELECT *" +
+                          $"FROM \"Users\"" +
+                          $"WHERE \"CompanyId\" = '{companyId}'";
+                var queryResult = await connection.QueryAsync<UserEntity>(sql, cancellationToken);
+                connection.Close();
+                return queryResult.ToList();
+            }
+        }
+
         public void Update(UserEntity entity)
         {
             entity.UpdatedAt = DateTime.Now.ToUniversalTime();

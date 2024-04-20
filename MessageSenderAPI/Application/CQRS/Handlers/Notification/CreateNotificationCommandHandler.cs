@@ -6,6 +6,7 @@ using NotificationMessageSender.Core.Common.Domain.Entities;
 using NotificationMessageSender.Core.Common.Enums;
 using NotificationMessageSender.Core.Common.Exceptions;
 using NotificationMessageSender.Core.Common.Interfaces.Repositories;
+using NotificationMessageSender.Core.Common.Uteis;
 using NotificationMessageSender.Core.MessageBus.Services.Interfaces;
 using NotificationMessageSender.Infraestructure.Repositories;
 using System.Text.RegularExpressions;
@@ -40,7 +41,7 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
                 throw new LimiteDeNotificacoesAtingidaException();
 
             if (command.Type == NotificationTypeEnum.Email)
-                if (!IsValidEmail(command.Receiver)) throw new Exception("Email de destino inválido.");
+                if (!IsValidEmailUtil.Check(command.Receiver)) throw new Exception("Email de destino inválido.");
 
             if (command.Type == NotificationTypeEnum.SMS)
                 if (!IsPhoneNumberValid(command.Receiver)) throw new Exception("Telefone de destino inválido.");
@@ -66,12 +67,6 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
             return notificationsRequests.Count < limitesPorContrato.GetValueOrDefault(company.Contract);
         }
 
-        private bool IsValidEmail(string email)
-        {
-            string pattern = @"^[\w-]+(\.[\w-]+)*@([a-z\d]+(-[a-z\d]+)*\.)+[a-z]{2,}$";
-
-            return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
-        }
         public static bool IsPhoneNumberValid(string phoneNumber)
         {
             phoneNumber = phoneNumber.Replace(" ", "");

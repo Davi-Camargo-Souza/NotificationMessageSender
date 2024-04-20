@@ -5,7 +5,6 @@
         public string Cpf { get; set; }
         public Guid CompanyId { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public bool Ativo { get; set; }
         public string BearerToken { get; set; }
     }
 }

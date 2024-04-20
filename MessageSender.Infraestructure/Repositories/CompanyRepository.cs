@@ -54,5 +54,11 @@ namespace NotificationMessageSender.Infraestructure.Repositories
                 return queryResult;
             }
         }
+
+        public void Update(CompanyEntity entity)
+        {
+            entity.UpdatedAt = DateTime.Now.ToUniversalTime();
+            _context.Update(entity);
+        }
     }
 }

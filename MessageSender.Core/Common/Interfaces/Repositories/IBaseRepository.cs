@@ -10,6 +10,6 @@
         Task<List<T>> GetAllAtivos(string tabela, CancellationToken cancellationToken);
         Task<List<T>> GetAllInativos(string tabela, CancellationToken cancellationToken);
         //void Update(T entity);
-        void Delete(T entity);
+        Task Delete(T entity);
     }
 }

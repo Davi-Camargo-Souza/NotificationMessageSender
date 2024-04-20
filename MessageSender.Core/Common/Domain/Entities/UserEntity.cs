@@ -10,7 +10,6 @@ namespace NotificationMessageSender.Core.Common.Domain.Entities
         public Guid CompanyId { get; set; }
         public string[] Roles { get; set; } = new string[] {RolesEnum.user.ToString()};
         public DateTime UpdatedAt { get; set; } = DateTime.Now.ToUniversalTime();
-        //public bool Ativo { get; set; } = true;
         public DateTime CreatedAt { get; set; } = DateTime.Now.ToUniversalTime();
     }
 }

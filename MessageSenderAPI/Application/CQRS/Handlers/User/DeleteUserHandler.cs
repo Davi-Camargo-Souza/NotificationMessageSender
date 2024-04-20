@@ -36,8 +36,9 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.User
             }
 
             if (entity == null) throw new Exception("Usuário não encontrado.");
+            if (entity.Name == "admin") throw new Exception("Não é permitido apagar o usuário admin pelo endpoint.");
 
-            _userRepository.Delete(entity);
+            await _userRepository.Delete(entity);
             await _unitOfWork.Commit(cancellationToken);
 
             var list = _userRepository.GetAll("Users", cancellationToken).Result;
