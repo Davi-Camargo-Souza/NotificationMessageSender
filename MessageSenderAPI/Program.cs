@@ -83,12 +83,10 @@ namespace NotificationMessageSenderAPI
                     };
                 });
 
-            var connectionString = builder.Configuration.GetConnectionString("PostgreSQL");
-
             builder.Services.AddTransient<ITokenService, TokenService>();
 
-
             //contextos
+            var connectionString = builder.Configuration.GetConnectionString("PostgreSQL");
             builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString, b => b.MigrationsAssembly("NotificationMessageSender.API")));
             builder.Services.AddTransient(_ => new DapperContext(connectionString));
 

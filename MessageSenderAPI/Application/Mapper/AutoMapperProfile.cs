@@ -22,8 +22,6 @@ namespace NotificationMessageSender.API.Application.Mapper
             CreateMap<CompanyEntity, CreateCompanyResponse>();
             CreateMap<UserEntity, GetUserResponse>();
             CreateMap<UserEntity, LoginResponse>();
-            CreateMap<CreateNotificationCommand, SendNotificationCommand>();
-            CreateMap<SendNotificationCommand, CreateNotificationCommand>();
         }
     }
 }

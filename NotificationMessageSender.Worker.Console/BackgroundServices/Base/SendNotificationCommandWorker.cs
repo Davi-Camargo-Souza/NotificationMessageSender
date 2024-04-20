@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NotificationMessageSender.API.Application.CQRS.Commands.Notification;
+using NotificationMessageSender.Worker.Application.Commands.Send.Base;
 
 namespace NotificationMessageSender.Worker.BackgroundServices.Base
 {

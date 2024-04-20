@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using NotificationMessageSender.API.Application.CQRS.Commands.Notification;
 using NotificationMessageSender.API.DTOs.Responses.Notification;
 using NotificationMessageSender.Core.Common.Domain.Entities;
@@ -13,18 +14,21 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
 {
     public class CreateNotificationCommandHandler : IRequestHandler<CreateNotificationCommand, CreateNotificationResponse>
     {
-        IMessageBus _messageBus;
-        IUserRepository _userRepository;
-        ICompanyRepository _companyRepository;
-        INotificationRepository _notificationRepository;
+        private readonly IMessageBus _messageBus;
+        private readonly IUserRepository _userRepository;
+        private readonly ICompanyRepository _companyRepository;
+        private readonly INotificationRepository _notificationRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
 
         public CreateNotificationCommandHandler(IMessageBus messageBus, IUserRepository userRepository, 
-            ICompanyRepository companyRepository, INotificationRepository notificationRepository)
+            ICompanyRepository companyRepository, INotificationRepository notificationRepository, IHttpContextAccessor httpContextAccessor)
         {
             _messageBus = messageBus;
             _userRepository = userRepository;
             _companyRepository = companyRepository;
             _notificationRepository = notificationRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public Task<CreateNotificationResponse> Handle(CreateNotificationCommand command, CancellationToken cancellationToken)
@@ -42,6 +46,7 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
                 if (!IsPhoneNumberValid(command.Receiver)) throw new Exception("Telefone de destino inválido.");
 
             command.Id = Guid.NewGuid();
+            command.Ip = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString();
 
             _messageBus.Publish("notifications", "send-notification", command);
             return Task.FromResult(new CreateNotificationResponse(command.Id, DateTime.Now.ToUniversalTime()));

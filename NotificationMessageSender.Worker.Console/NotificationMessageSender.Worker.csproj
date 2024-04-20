@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MessageSenderAPI\NotificationMessageSender.API.csproj" />
     <ProjectReference Include="..\NotificationMessageSender.Core.MessageBus\NotificationMessageSender.Core.MessageBus.csproj" />
+    <ProjectReference Include="..\NotificationMessageSender.Worker.Application\NotificationMessageSender.Worker.Application.csproj" />
   </ItemGroup>
 
 </Project>

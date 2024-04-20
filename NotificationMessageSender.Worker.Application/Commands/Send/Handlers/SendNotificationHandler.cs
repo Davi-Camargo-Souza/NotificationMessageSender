@@ -15,6 +15,7 @@ using Vonage.Request;
 using NotificationMessageSender.API.DTOs.Responses.Notification;
 using NotificationMessageSender.API.Application.CQRS.Commands.Notification;
 using Microsoft.AspNetCore.Http;
+using NotificationMessageSender.Worker.Application.Commands.Send.Base;
 
 namespace NotificationMessageSender.Worker.Application.Commands.Send.Handlers
 {
@@ -67,9 +68,9 @@ namespace NotificationMessageSender.Worker.Application.Commands.Send.Handlers
             {
                 UserId = user.Id,
                 Id = command.Id,
-                Message = command.Message,
+                Message = command.Subject + " " + command.Message,
                 Receiver = command.Receiver,
-                Ip = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString(),
+                Ip = command.Ip,
                 CompanyId = company.Id
             };
 

@@ -25,7 +25,7 @@ namespace NotificationMessageSender.Infraestructure.Repositories
                 connection.Open();
                 var sql = $"SELECT *" +
                           $"FROM \"NotificationsRequests\"" +
-                          $"WHERE DATE(\"CreatedAt\") = '{date}'" +
+                          $"WHERE DATE(\"SentAt\") = '{date}'" +
                           $"AND \"CompanyId\" = '{companyId}'";
                 var queryResult = await connection.QueryAsync<NotificationsRequestEntity>(sql, cancellationToken);
                 connection.Close();

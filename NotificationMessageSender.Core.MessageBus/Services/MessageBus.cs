@@ -70,13 +70,24 @@ namespace NotificationMessageSender.Core.MessageBus.Services
 
         public void DeclareExchangeAndQueue (string exchange, string routingKey, IModel channel)
         {
-            channel.ExchangeDeclare(exchange, ExchangeType.Direct, true);
-            _exchange.Add(exchange, exchange);
+            bool containsExchange = _exchange.ContainsKey(exchange);
+            bool containsRoutingKey = containsExchange && _routingKeys.ContainsKey(routingKey);
 
-            channel.QueueDeclare(routingKey, true, false, false, null);
-            channel.QueueBind(routingKey, exchange, routingKey);
+            if (containsExchange && containsRoutingKey) return;
 
-            _routingKeys.Add(routingKey, routingKey);
+            if (!containsExchange!)
+            {
+                channel.ExchangeDeclare(exchange, ExchangeType.Direct, true);
+                _exchange.Add(exchange, exchange);
+            }
+
+            if (!containsRoutingKey)
+            {
+                channel.QueueDeclare(routingKey, true, false, false, null);
+                channel.QueueBind(routingKey, exchange, routingKey);
+
+                _routingKeys.Add(routingKey, routingKey);
+            }
         }
 
         public void Subscribe<TMessage>(string exchange, string routingKey, Func<TMessage, Task> function, CancellationToken stoppingToken)
@@ -87,6 +98,7 @@ namespace NotificationMessageSender.Core.MessageBus.Services
             _consumerChannel.BasicQos(0, 1, false);
 
             var consumer = new EventingBasicConsumer(_consumerChannel);
+            var consumerTag = _consumerChannel.BasicConsume(routingKey, false, consumer);
 
             consumer.Received += async (sender, eventArgs) =>
             {
@@ -107,8 +119,14 @@ namespace NotificationMessageSender.Core.MessageBus.Services
                 }
             };
 
-            var consumerTag = _consumerChannel.BasicConsume(routingKey, false, consumer);
-            _consumerChannel.BasicCancel(consumerTag);
+            //_consumerChannel.BasicCancel(consumerTag);
+
+            //Console.WriteLine("Worker RabbitMQ está esperando por mensagens...");
+
+            //while (true)
+            //{
+            //    System.Threading.Thread.Sleep(1000);
+            //}
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using NotificationMessageSender.API.Application.CQRS.Commands.Notification;
 using NotificationMessageSender.Core.MessageBus.Services.Interfaces;
+using NotificationMessageSender.Worker.Application.Commands.Send.Base;
 using NotificationMessageSender.Worker.BackgroundServices.Base;
 
 

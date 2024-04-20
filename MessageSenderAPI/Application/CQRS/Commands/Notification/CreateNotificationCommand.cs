@@ -17,12 +17,13 @@ namespace NotificationMessageSender.API.Application.CQRS.Commands.Notification
             Subject = request.Subject;
         }
 
-        public NotificationTypeEnum Type { get; set; }
-        public string Message { get; set; }
-        public string Receiver { get; set; }
-        public Guid UserSender { get; set; }
-        public string Subject { get; set; }
         public Guid Id { get; set; }
+        public NotificationTypeEnum Type { get; set; }
+        public string Subject { get; set; }
+        public string Message { get; set; }
+        public Guid UserSender { get; set; }
+        public string? Ip { get; set; }
+        public string Receiver { get; set; }
 
     }
 }

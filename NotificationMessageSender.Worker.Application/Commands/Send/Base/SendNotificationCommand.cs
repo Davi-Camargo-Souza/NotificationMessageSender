@@ -9,7 +9,7 @@ namespace NotificationMessageSender.Worker.Application.Commands.Send.Base
     {
         protected SendNotificationCommand() { }
 
-        public SendNotificationCommand(NotificationTypeEnum type, string message, string receiver, Guid userSender, string subject, Guid id)
+        public SendNotificationCommand(NotificationTypeEnum type, string message, string receiver, Guid userSender, string subject, Guid id, string ip)
         {
             Type = type;
             Message = message;
@@ -17,13 +17,15 @@ namespace NotificationMessageSender.Worker.Application.Commands.Send.Base
             UserSender = userSender;
             Subject = subject;
             Id = id;
+            Ip = ip;
         }
 
-        public NotificationTypeEnum Type { get; set; }
-        public string Message { get; set; }
-        public string Receiver { get; set; }
-        public Guid UserSender { get; set; }
-        public string Subject { get; set; }
         public Guid Id { get; set; }
+        public NotificationTypeEnum Type { get; set; }
+        public string Subject { get; set; }
+        public string Message { get; set; }
+        public Guid UserSender { get; set; }
+        public string Ip { get; set; }
+        public string Receiver { get; set; }
     }
 }
