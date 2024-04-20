@@ -1,4 +1,4 @@
-﻿namespace NotificationMessageSender.Core.Common.DTOs
+﻿namespace NotificationMessageSender.API.DTOs.Requests
 
 {
     public class EmailRequest

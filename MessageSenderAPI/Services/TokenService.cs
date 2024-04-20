@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using NotificationMessageSender.Core.Common.Domain.Entities;
-using NotificationMessageSender.Core.Common.Interfaces;
+using NotificationMessageSender.Core.Common.Interfaces.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NotificationMessageSender.Core.Common.Interfaces
+namespace NotificationMessageSender.Core.Common.Interfaces.Repositories
 {
     public interface INotificationRepository : IBaseRepository<NotificationsRequestEntity>
     {

@@ -1,6 +1,6 @@
 ﻿using NotificationMessageSender.Core.Common.Domain.Entities;
 
-namespace NotificationMessageSender.Core.Common.Interfaces
+namespace NotificationMessageSender.Core.Common.Interfaces.Repositories
 {
     public interface IUserRepository : IBaseRepository<UserEntity>
     {

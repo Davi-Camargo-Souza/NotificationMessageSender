@@ -1,4 +1,4 @@
-﻿namespace NotificationMessageSender.Core.Common.Interfaces
+﻿namespace NotificationMessageSender.Core.Common.Interfaces.Repositories
 {
     public interface IBaseRepository<T>
     {

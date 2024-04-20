@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using NotificationMessageSender.API.Application.CQRS.Queries;
-using NotificationMessageSender.API.DTOs.Responses;
+using NotificationMessageSender.API.DTOs.Responses.Notification;
 
 namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
 {

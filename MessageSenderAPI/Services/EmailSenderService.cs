@@ -1,12 +1,11 @@
-﻿using NotificationMessageSender.API.DTOs.Requests;
-using NotificationMessageSender.Core.Common.DTOs;
-using NotificationMessageSender.Core.Common.Interfaces;
+﻿using NotificationMessageSender.Core.Common.DTOs;
+using NotificationMessageSender.Core.Common.Interfaces.Services;
 using System.Net;
 using System.Net.Mail;
 
 namespace NotificationMessageSender.API.Services
 {
-    public class EmailSender : IEmailSender
+    public class EmailSenderService : IEmailSenderService
     {
         public async Task SendEmailAsync(EmailRequest request)
         {

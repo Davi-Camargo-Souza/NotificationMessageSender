@@ -1,6 +1,6 @@
 ﻿using NotificationMessageSender.Core.Common.Domain.Entities;
 
-namespace NotificationMessageSender.API.DTOs.Responses
+namespace NotificationMessageSender.API.DTOs.Responses.Notification
 {
     public class GetNotificationResponse
     {

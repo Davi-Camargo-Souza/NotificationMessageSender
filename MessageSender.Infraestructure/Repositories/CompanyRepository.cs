@@ -2,18 +2,14 @@
 using NotificationMessageSender.Core.Common.Domain.Entities;
 using NotificationMessageSender.Core.Common.Enums;
 using NotificationMessageSender.Infraestructure.Context;
-using NotificationMessageSender.Core.Common.Interfaces;
+using NotificationMessageSender.Core.Common.Interfaces.Repositories;
 
 namespace NotificationMessageSender.Infraestructure.Repositories
 {
     public class CompanyRepository : BaseRepository<CompanyEntity>, ICompanyRepository
     {
-        private readonly AppDbContext _context;
-        private readonly DapperContext _dapper;
         public CompanyRepository(AppDbContext context, DapperContext dapper) : base(context, dapper)
         {
-            _context = context;
-            _dapper = dapper;
         }
 
         public async Task<List<CompanyEntity>> GetAllCompanyByContract(ContractEnum contract, CancellationToken cancellationToken)

@@ -1,7 +1,7 @@
 ﻿using NotificationMessageSender.Core.Common.Domain.Entities;
 using NotificationMessageSender.Core.Common.Enums;
 
-namespace NotificationMessageSender.Core.Common.Interfaces
+namespace NotificationMessageSender.Core.Common.Interfaces.Repositories
 {
     public interface ICompanyRepository : IBaseRepository<CompanyEntity>
     {

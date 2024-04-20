@@ -1,4 +1,4 @@
-﻿using NotificationMessageSender.Core.Common.Interfaces;
+﻿using NotificationMessageSender.Core.Common.Interfaces.Data;
 using NotificationMessageSender.Infraestructure.Context;
 
 namespace NotificationMessageSender.Infraestructure.Repositories

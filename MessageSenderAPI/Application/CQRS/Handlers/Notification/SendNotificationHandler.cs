@@ -1,52 +1,50 @@
 ﻿using MediatR;
-using NotificationMessageSender.API.Application.CQRS.Commands;
-using NotificationMessageSender.API.DTOs.Responses;
 using NotificationMessageSender.Core.Common.Domain.Entities;
-using NotificationMessageSender.Core.Common.DTOs;
+using NotificationMessageSender.API.DTOs.Requests;
 using NotificationMessageSender.Core.Common.Enums;
 using NotificationMessageSender.Core.Common.Exceptions;
 using NotificationMessageSender.Core.Common.Interfaces;
+using NotificationMessageSender.Core.Common.Interfaces.Data;
+using NotificationMessageSender.Core.Common.Interfaces.Repositories;
+using NotificationMessageSender.Core.Common.Interfaces.Services;
 using System.Text.RegularExpressions;
 using Vonage;
 using Vonage.Messages.WhatsApp;
 using Vonage.Messaging;
 using Vonage.Request;
+using NotificationMessageSender.API.DTOs.Responses.Notification;
+using NotificationMessageSender.API.Application.CQRS.Commands.Notification;
 
 namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
 {
-    public class SendNotificationHandler : IRequestHandler<NotificationCommand, SendNotificationResponse>
+    public class SendNotificationHandler : IRequestHandler<SendNotificationCommand, SendNotificationResponse>
     {
         private readonly INotificationRepository _notificationRepository;
         private readonly ICompanyRepository _companyRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailSenderService _emailSenderService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUnitOfWork _unitOfWork;
 
         public SendNotificationHandler(INotificationRepository notificationRepository, ICompanyRepository companyRepository, 
-            IUserRepository userRepository, IEmailSender emailsender, IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork)
+            IUserRepository userRepository, IEmailSenderService emailSenderService, IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork)
         {
             _notificationRepository = notificationRepository;
             _companyRepository = companyRepository;
             _userRepository = userRepository;
-            _emailSender = emailsender;
+            _emailSenderService = emailSenderService;
             _httpContextAccessor = httpContextAccessor;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<SendNotificationResponse> Handle(NotificationCommand command, CancellationToken cancellationToken)
+        public async Task<SendNotificationResponse> Handle(SendNotificationCommand command, CancellationToken cancellationToken)
         {
-            var user = _userRepository.Get(command.UserSender, "Users", cancellationToken).Result;
-            var company = _companyRepository.Get(user.CompanyId, "Companies", cancellationToken).Result;
-
-            if (!NaoChegouNoLimiteDoContrato(company, cancellationToken))
-                throw new LimiteDeNotificacoesAtingidaException();
+            
 
             if (command.Type == NotificationTypeEnum.Email)
             {
-                if (!IsValidEmail(command.Receiver)) throw new Exception("Email de destino inválido.");
 
-                await _emailSender.SendEmailAsync(new EmailRequest(
+                await _emailSenderService.SendEmailAsync(new EmailRequest(
                     company.Email,
                         command.Receiver,
                         command.Subject,
@@ -59,11 +57,8 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
                 if (!IsPhoneNumberValid(command.Receiver)) throw new Exception("Telefone de destino inválido.");
 
                 command.Message = command.Subject + "\r\n" + command.Message;
-
                 var telephone = LimparFormatacaoTelefone(command.Receiver);
-
                 if (!telephone.StartsWith("55")) telephone = "55" + telephone;
-
                 command.Receiver = telephone;
 
                 await SendSMS(command);
@@ -81,43 +76,14 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
             _notificationRepository.Create(notification, cancellationToken);
             await _unitOfWork.Commit(cancellationToken);
 
-            var response = new SendNotificationResponse()
-            {
-                Requests = _notificationRepository.GetAllSentNotificationsByUser(user.Id, cancellationToken).Result
-            };
-
-            return response;
+            return new SendNotificationResponse() { Requests = _notificationRepository.GetAllSentNotificationsByUser(user.Id, cancellationToken).Result };
         }
 
-        private bool NaoChegouNoLimiteDoContrato(CompanyEntity company, CancellationToken cancellationToken)
-        {
-            var notificationsRequests = _notificationRepository.GetAllRequestsOfDayByCompany(DateOnly.FromDateTime(DateTime.Today), company.Id, cancellationToken).Result;
 
-            Dictionary<ContractEnum, int> limitesPorContrato = new Dictionary<ContractEnum, int>
-            {
-                { ContractEnum.Prata, 5 },
-                { ContractEnum.Ouro, 15 },
-                { ContractEnum.Diamante, 100 }
-            };
 
-            if (limitesPorContrato.TryGetValue(company.Contract, out int limite))
-            {
-                if (notificationsRequests.Count < limite)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        
 
-        private bool IsValidEmail(string email)
-        {
-            string pattern = @"^[\w-]+(\.[\w-]+)*@([a-z\d]+(-[a-z\d]+)*\.)+[a-z]{2,}$";
-
-            return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
-        }
-
-        private async Task<Vonage.Messaging.SendSmsResponse> SendSMS(NotificationCommand command)
+        private async Task<SendSmsResponse> SendSMS(SendNotificationCommand command)
         {
             var credentials = Credentials.FromApiKeyAndSecret(
                 "e83c42fa",
@@ -146,9 +112,7 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
 
         public static string LimparFormatacaoTelefone(string numeroTelefone)
         {
-            string numeroLimpo = Regex.Replace(numeroTelefone, @"[^\d]", "");
-
-            return numeroLimpo;
+            return Regex.Replace(numeroTelefone, @"[^\d]", "");
         }
     }
 }

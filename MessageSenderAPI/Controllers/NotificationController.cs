@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using NotificationMessageSender.API.Application.CQRS.Commands;
 using NotificationMessageSender.API.Application.CQRS.Queries;
 using NotificationMessageSender.API.DTOs.Requests;
-using NotificationMessageSender.API.DTOs.Responses;
+using NotificationMessageSender.API.DTOs.Responses.Notification;
 using NotificationMessageSender.Core.Common;
 using NotificationMessageSender.Core.Common.Exceptions;
 using System.Security.Claims;
@@ -25,11 +25,11 @@ namespace NotificationMessageSender.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<SendNotificationResponse>>> SendNotification(NotificationRequest request)
+        public async Task<ActionResult<ServiceResponse<CreateNotificationResponse>>> SendNotification(NotificationRequest request)
         {
-            var serviceResponse = new ServiceResponse<SendNotificationResponse>();
+            var serviceResponse = new ServiceResponse<CreateNotificationResponse>();
             try {
-                var command = new NotificationCommand(request);
+                var command = new CreateNotificationCommand(request);
                 var userId = User.FindFirst(ClaimTypes.Name)?.Value;
 
                 if (userId == null) throw new Exception("Usuário não autenticado.");

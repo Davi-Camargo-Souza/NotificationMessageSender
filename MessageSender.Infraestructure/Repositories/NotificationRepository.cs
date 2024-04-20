@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using NotificationMessageSender.Core.Common.Domain.Entities;
-using NotificationMessageSender.Core.Common.Interfaces;
+using NotificationMessageSender.Core.Common.Interfaces.Repositories;
 using NotificationMessageSender.Infraestructure.Context;
 using System;
 using System.Collections.Generic;
@@ -14,12 +14,8 @@ namespace NotificationMessageSender.Infraestructure.Repositories
 {
     public class NotificationRepository : BaseRepository<NotificationsRequestEntity>, INotificationRepository
     {
-        private readonly AppDbContext _context;
-        private readonly DapperContext _dapper;
         public NotificationRepository(AppDbContext context, DapperContext dapper) : base(context, dapper)
         {
-            _context = context;
-            _dapper = dapper;
         }
 
         public async Task<List<NotificationsRequestEntity>> GetAllRequestsOfDayByCompany(DateOnly date, Guid companyId, CancellationToken cancellationToken)

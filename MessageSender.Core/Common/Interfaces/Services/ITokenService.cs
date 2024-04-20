@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NotificationMessageSender.Core.Common.Interfaces
+namespace NotificationMessageSender.Core.Common.Interfaces.Services
 {
     public interface ITokenService
     {
-        public string Generate (UserEntity user);
+        public string Generate(UserEntity user);
     }
 }

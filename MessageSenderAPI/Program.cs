@@ -14,6 +14,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.HttpOverrides;
+using NotificationMessageSender.Core.Common.Interfaces.Repositories;
+using NotificationMessageSender.Core.Common.Interfaces.Data;
+using NotificationMessageSender.Core.Common.Interfaces.Services;
+using NotificationMessageSender.Core.MessageBus.Services.Interfaces;
+using NotificationMessageSender.Core.MessageBus.Services;
 
 namespace NotificationMessageSenderAPI
 {
@@ -94,11 +99,12 @@ namespace NotificationMessageSenderAPI
             builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
             //services
-            builder.Services.AddTransient<IEmailSender, EmailSender>();
+            builder.Services.AddTransient<IEmailSenderService, EmailSenderService>();
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            builder.Services.AddSingleton<IMessageBus, MessageBus>();
 
             builder.Services.AddHttpContextAccessor();
 

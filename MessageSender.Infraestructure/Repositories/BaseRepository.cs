@@ -1,14 +1,14 @@
 ﻿using Dapper;
 using NotificationMessageSender.Core.Common.Domain.Entities;
 using NotificationMessageSender.Infraestructure.Context;
-using NotificationMessageSender.Core.Common.Interfaces;
+using NotificationMessageSender.Core.Common.Interfaces.Repositories;
 
 namespace NotificationMessageSender.Infraestructure.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private readonly AppDbContext _context;
-        private readonly DapperContext _dapper;
+        protected readonly AppDbContext _context;
+        protected readonly DapperContext _dapper;
 
         public BaseRepository(AppDbContext context, DapperContext dapper)
         {
