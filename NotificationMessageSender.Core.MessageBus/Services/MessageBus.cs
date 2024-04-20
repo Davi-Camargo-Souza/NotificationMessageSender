@@ -53,7 +53,7 @@ namespace NotificationMessageSender.Core.MessageBus.Services
         public void Dispose()
         {
             _connection.Dispose();
-            
+            _consumerChannel.Dispose();
         }
 
         public void Publish(string exchange, string routingKey, dynamic command)
@@ -94,9 +94,11 @@ namespace NotificationMessageSender.Core.MessageBus.Services
                 {
                     var messageBody = eventArgs.Body.ToArray();
                     string messageJson = Encoding.UTF8.GetString(messageBody);
+                    Console.WriteLine(messageJson);
                     var args = JsonSerializer.Deserialize<TMessage>(messageJson);
 
-                    await 
+
+                    await function(args);
 
                     _consumerChannel.BasicAck(eventArgs.DeliveryTag, false);
                 } catch (Exception ex)
@@ -107,12 +109,6 @@ namespace NotificationMessageSender.Core.MessageBus.Services
 
             var consumerTag = _consumerChannel.BasicConsume(routingKey, false, consumer);
             _consumerChannel.BasicCancel(consumerTag);
-
-
-
-
-
-
         }
     }
 }

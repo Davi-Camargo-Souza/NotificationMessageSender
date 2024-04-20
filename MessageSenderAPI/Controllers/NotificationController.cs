@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NotificationMessageSender.API.Application.CQRS.Commands;
+using NotificationMessageSender.API.Application.CQRS.Commands.Notification;
 using NotificationMessageSender.API.Application.CQRS.Queries;
 using NotificationMessageSender.API.DTOs.Requests;
 using NotificationMessageSender.API.DTOs.Responses.Notification;

@@ -35,12 +35,15 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
             if (!NaoChegouNoLimiteDoContrato(company, cancellationToken))
                 throw new LimiteDeNotificacoesAtingidaException();
 
-            if (!IsValidEmail(command.Receiver)) throw new Exception("Email de destino inválido.");
+            if (command.Type == NotificationTypeEnum.Email)
+                if (!IsValidEmail(command.Receiver)) throw new Exception("Email de destino inválido.");
 
-
+            if (command.Type == NotificationTypeEnum.SMS)
+                if (!IsPhoneNumberValid(command.Receiver)) throw new Exception("Telefone de destino inválido.");
 
             command.Id = Guid.NewGuid();
-            _messageBus.Publish("notifications", "send-notification-" + command.Type, command);
+
+            _messageBus.Publish("notifications", "send-notification", command);
             return Task.FromResult(new CreateNotificationResponse(command.Id, DateTime.Now.ToUniversalTime()));
         }
 
@@ -63,6 +66,13 @@ namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
             string pattern = @"^[\w-]+(\.[\w-]+)*@([a-z\d]+(-[a-z\d]+)*\.)+[a-z]{2,}$";
 
             return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
+        }
+        public static bool IsPhoneNumberValid(string phoneNumber)
+        {
+            phoneNumber = phoneNumber.Replace(" ", "");
+            string pattern = @"^\+?\d{0,2}\s?\(?\d{2,}\)?[-\s]?\d{5,}[-\s]?\d{4}$";
+
+            return Regex.IsMatch(phoneNumber, pattern);
         }
 
     }

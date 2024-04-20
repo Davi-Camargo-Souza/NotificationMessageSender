@@ -11,6 +11,6 @@ namespace NotificationMessageSender.Core.Common.Domain.Entities
         public ContractEnum Contract {  get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.Now.ToUniversalTime();
         //public bool Ativo { get; set; } = true;
-
+        public DateTime CreatedAt { get; set; } = DateTime.Now.ToUniversalTime();
     }
 }

@@ -14,8 +14,9 @@ using Vonage.Messaging;
 using Vonage.Request;
 using NotificationMessageSender.API.DTOs.Responses.Notification;
 using NotificationMessageSender.API.Application.CQRS.Commands.Notification;
+using Microsoft.AspNetCore.Http;
 
-namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
+namespace NotificationMessageSender.Worker.Application.Commands.Send.Handlers
 {
     public class SendNotificationHandler : IRequestHandler<SendNotificationCommand, SendNotificationResponse>
     {

@@ -1,5 +1,4 @@
-﻿using NotificationMessageSender.Core.Common.DTOs;
-using NotificationMessageSender.Core.Common.Interfaces.Services;
+﻿using NotificationMessageSender.Core.Common.Interfaces.Services;
 using System.Net;
 using System.Net.Mail;
 
@@ -7,7 +6,7 @@ namespace NotificationMessageSender.API.Services
 {
     public class EmailSenderService : IEmailSenderService
     {
-        public async Task SendEmailAsync(EmailRequest request)
+        public async Task SendEmailAsync(dynamic request)
         {
             var client = new SmtpClient("smtp-mail.outlook.com", 587)
             {
@@ -23,6 +22,5 @@ namespace NotificationMessageSender.API.Services
                 request.Message
                 ));
         }
-
     }
 }

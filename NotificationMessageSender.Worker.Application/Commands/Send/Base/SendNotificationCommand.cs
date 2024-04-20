@@ -3,18 +3,11 @@ using NotificationMessageSender.API.DTOs.Requests;
 using NotificationMessageSender.API.DTOs.Responses.Notification;
 using NotificationMessageSender.Core.Common.Enums;
 
-namespace NotificationMessageSender.API.Application.CQRS.Commands.Notification
+namespace NotificationMessageSender.Worker.Application.Commands.Send.Base
 {
     public class SendNotificationCommand : IRequest<SendNotificationResponse>
     {
         protected SendNotificationCommand() { }
-        //public SendNotificationCommand(CreateNotificationCommand request)
-        //{
-        //    Type = request.Type;
-        //    Message = request.Message;
-        //    Receiver = request.Receiver;
-        //    Subject = request.Subject;
-        //}
 
         public SendNotificationCommand(NotificationTypeEnum type, string message, string receiver, Guid userSender, string subject, Guid id)
         {
