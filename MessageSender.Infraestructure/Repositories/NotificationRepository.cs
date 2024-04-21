@@ -24,7 +24,7 @@ namespace NotificationMessageSender.Infraestructure.Repositories
             {
                 connection.Open();
                 var sql = $"SELECT *" +
-                          $"FROM \"NotificationsRequests\"" +
+                          $"FROM \"Notifications\"" +
                           $"WHERE DATE(\"SentAt\") = '{date}'" +
                           $"AND \"CompanyId\" = '{companyId}'";
                 var queryResult = await connection.QueryAsync<NotificationEntity>(sql, cancellationToken);
@@ -40,7 +40,7 @@ namespace NotificationMessageSender.Infraestructure.Repositories
             {
                 connection.Open();
                 var sql = $"SELECT *" +
-                          $"FROM \"NotificationsRequests\"" +
+                          $"FROM \"Notifications\"" +
                           $"WHERE \"UserId\" = '{userId}'";
                 var queryResult = await connection.QueryAsync<NotificationEntity>(sql, cancellationToken);
                 connection.Close();
