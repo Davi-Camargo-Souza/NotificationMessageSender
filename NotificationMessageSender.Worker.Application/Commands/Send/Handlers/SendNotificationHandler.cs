@@ -64,7 +64,7 @@ namespace NotificationMessageSender.Worker.Application.Commands.Send.Handlers
                 await SendSMS(command);
             }
 
-            var notification = new NotificationsRequestEntity()
+            var notification = new NotificationEntity()
             {
                 UserId = user.Id,
                 Id = command.Id,

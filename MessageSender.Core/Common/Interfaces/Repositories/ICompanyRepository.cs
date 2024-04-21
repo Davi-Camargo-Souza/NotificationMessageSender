@@ -5,9 +5,8 @@ namespace NotificationMessageSender.Core.Common.Interfaces.Repositories
 {
     public interface ICompanyRepository : IBaseRepository<CompanyEntity>
     {
-        Task<List<CompanyEntity>> GetAllCompanyByContract(ContractEnum contract, CancellationToken cancellationToken);
-        Task<CompanyEntity> GetCompanyByEmail(string email, CancellationToken cancellationToken);
-        Task<CompanyEntity> GetCompanyByCnpj(string cnpj, CancellationToken cancellationToken);
+        public Task<CompanyEntity> GetCompanyByEmail(string email, CancellationToken cancellationToken);
+        public Task<CompanyEntity> GetCompanyByCnpj(string cnpj, CancellationToken cancellationToken);
         public void Update(CompanyEntity entity);
     }
 }

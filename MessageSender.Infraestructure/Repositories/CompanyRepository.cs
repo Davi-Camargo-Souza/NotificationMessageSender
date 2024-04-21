@@ -12,21 +12,6 @@ namespace NotificationMessageSender.Infraestructure.Repositories
         {
         }
 
-        public async Task<List<CompanyEntity>> GetAllCompanyByContract(ContractEnum contract, CancellationToken cancellationToken)
-        {
-            using (var connection = _dapper.CreateConnection())
-            {
-                connection.Open();
-                var sql = $"SELECT *" +
-                          $"FROM \"Companies\"" +
-                          $"WHERE \"Contract\" = '{contract}'";
-                var queryResult = await connection.QueryAsync<CompanyEntity>(sql, cancellationToken); 
-                connection.Close();
-                if (queryResult == null) return null;
-                return queryResult.ToList();
-            }
-        }
-
         public async Task<CompanyEntity> GetCompanyByCnpj(string cnpj, CancellationToken cancellationToken)
         {
             using (var connection = _dapper.CreateConnection())

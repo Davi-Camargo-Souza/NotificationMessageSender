@@ -4,6 +4,6 @@ namespace NotificationMessageSender.API.DTOs.Responses.Notification
 {
     public class GetNotificationResponse
     {
-        public NotificationsRequestEntity Notification { get; set; }
+        public NotificationEntity Notification { get; set; }
     }
 }

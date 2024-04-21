@@ -2,7 +2,7 @@
 
 namespace NotificationMessageSender.Core.Common.Domain.Entities
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
 
         [Key]

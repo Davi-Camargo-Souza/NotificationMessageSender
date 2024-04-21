@@ -2,7 +2,7 @@
 
 namespace NotificationMessageSender.Core.Common.Domain.Entities
 {
-    public class NotificationsRequestEntity : BaseEntity
+    public class NotificationEntity : BaseEntity
     {
         public Guid UserId { get; set; }
         public Guid CompanyId { get; set; }

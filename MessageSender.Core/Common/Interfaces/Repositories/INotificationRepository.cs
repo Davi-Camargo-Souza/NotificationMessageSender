@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace NotificationMessageSender.Core.Common.Interfaces.Repositories
 {
-    public interface INotificationRepository : IBaseRepository<NotificationsRequestEntity>
+    public interface INotificationRepository : IBaseRepository<NotificationEntity>
     {
-        public Task<List<NotificationsRequestEntity>> GetAllRequestsOfDayByCompany(DateOnly date, Guid companyId, CancellationToken cancellationToken);
-        public Task<List<NotificationsRequestEntity>> GetAllSentNotificationsByUser(Guid userId, CancellationToken cancellationToken);
+        public Task<List<NotificationEntity>> GetAllRequestsOfDayByCompany(DateOnly date, Guid companyId, CancellationToken cancellationToken);
+        public Task<List<NotificationEntity>> GetAllSentNotificationsByUser(Guid userId, CancellationToken cancellationToken);
 
     }
 }
