@@ -33,8 +33,6 @@ namespace NotificationMessageSender.API.Controllers
                 var command = new CreateNotificationCommand(request);
                 var userId = User.FindFirst(ClaimTypes.Name)?.Value;
 
-                if (userId == null) throw new Exception("Usuário não autenticado.");
-
                 command.UserSender = Guid.Parse(userId);
                 serviceResponse.Dados = await _mediator.Send(command);
 

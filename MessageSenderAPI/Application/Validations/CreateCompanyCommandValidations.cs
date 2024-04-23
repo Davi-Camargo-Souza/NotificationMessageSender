@@ -4,9 +4,9 @@ using NotificationMessageSender.API.DTOs.Requests.Company;
 
 namespace NotificationMessageSender.API.Application.Validations
 {
-    public class CreateCompanyCommandValidation : AbstractValidator<CreateCompanyCommand>
+    public class CreateCompanyCommandValidations : AbstractValidator<CreateCompanyCommand>
     {
-        public CreateCompanyCommandValidation()
+        public CreateCompanyCommandValidations()
         {
             RuleFor(c => c.Email)
                 .NotEmpty().WithMessage("O email não pode estar vazio.")
