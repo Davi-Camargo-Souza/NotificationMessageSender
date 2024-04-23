@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationMessageSender.A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{37DBAB19-99D7-44C8-AD57-020F2A1E8AE4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{242A22FC-BE2A-4925-BBA5-A22C4225429C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{DECE36F7-03FD-4FE7-BE16-76FACD1B70E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{42C1D269-D32B-4271-8C48-F80DD1E8FA2C}"
@@ -31,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationMessageSender.W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{EA6682D6-E927-443F-BB5D-0CF649C5988E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationMessageSender.Worker.Application", "NotificationMessageSender.Worker.Application\NotificationMessageSender.Worker.Application.csproj", "{D8AAF9D5-BAF0-4BED-8984-0B9692EB36B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationMessageSender.Worker.Application", "NotificationMessageSender.Worker.Application\NotificationMessageSender.Worker.Application.csproj", "{D8AAF9D5-BAF0-4BED-8984-0B9692EB36B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
