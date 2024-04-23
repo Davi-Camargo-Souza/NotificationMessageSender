@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using NotificationMessageSender.API.DTOs.Responses.User;
 using AutoMapper;
-using NotificationMessageSender.Core.Common.Uteis;
+using NotificationMessageSender.API.Application.Uteis;
 using NotificationMessageSender.Core.Common.Domain.Entities;
 using NotificationMessageSender.API.Application.CQRS.Commands.User;
 using NotificationMessageSender.Core.Common.Interfaces.Repositories;

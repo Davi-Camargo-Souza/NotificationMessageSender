@@ -5,7 +5,7 @@ using NotificationMessageSender.API.DTOs.Responses;
 using NotificationMessageSender.API.Services;
 using NotificationMessageSender.Core.Common.Interfaces.Repositories;
 using NotificationMessageSender.Core.Common.Interfaces.Services;
-using NotificationMessageSender.Core.Common.Uteis;
+using NotificationMessageSender.API.Application.Uteis;
 using System.Security.Authentication;
 
 namespace NotificationMessageSender.API.Application.CQRS.Handlers

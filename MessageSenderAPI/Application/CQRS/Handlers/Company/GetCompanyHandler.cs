@@ -3,9 +3,7 @@ using NotificationMessageSender.API.Application.CQRS.Queries.Company;
 using NotificationMessageSender.API.DTOs.Responses.Company;
 using NotificationMessageSender.Core.Common.Domain.Entities;
 using NotificationMessageSender.Core.Common.Interfaces.Repositories;
-using NotificationMessageSender.Core.Common.Uteis;
-using NotificationMessageSender.Infraestructure.Repositories;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using NotificationMessageSender.API.Application.Uteis;
 
 namespace NotificationMessageSender.API.Application.CQRS.Handlers.Company
 {

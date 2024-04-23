@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-namespace NotificationMessageSender.Core.Common.Uteis
+namespace NotificationMessageSender.API.Application.Uteis
 {
     public static class IsValidEmailUtil
     {
@@ -19,4 +19,3 @@ namespace NotificationMessageSender.Core.Common.Uteis
         }
     }
 }
-

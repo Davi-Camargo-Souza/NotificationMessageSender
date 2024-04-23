@@ -6,9 +6,8 @@ using NotificationMessageSender.Core.Common.Domain.Entities;
 using NotificationMessageSender.Core.Common.Enums;
 using NotificationMessageSender.Core.Common.Exceptions;
 using NotificationMessageSender.Core.Common.Interfaces.Repositories;
-using NotificationMessageSender.Core.Common.Uteis;
+using NotificationMessageSender.API.Application.Uteis;
 using NotificationMessageSender.Core.MessageBus.Services.Interfaces;
-using NotificationMessageSender.Infraestructure.Repositories;
 using System.Text.RegularExpressions;
 
 namespace NotificationMessageSender.API.Application.CQRS.Handlers.Notification
